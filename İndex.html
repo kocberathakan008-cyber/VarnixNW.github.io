@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Varnix Network | Minecraft Sunucusu</title>
+<meta name="description" content="Varnix Network: Türkçe Minecraft sunucusu. Varnix SMP şimdi açık, One Block yakında.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#09080f;
+  --panel:#14121f;
+  --panel-2:#1b1829;
+  --line:rgba(255,255,255,.09);
+  --text:#f2f0fa;
+  --muted:#9b98b0;
+  --violet:#8b5cf6;
+  --cyan:#22d3ee;
+  --amber:#fbbf24;
+  --green:#4ade80;
+  --r:20px;
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--ink);color:var(--text);font:400 17px/1.65 "Plus Jakarta Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--cyan);outline-offset:3px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+
+/* arka plan ışıması */
+.glow{position:absolute;inset:0 0 auto 0;height:760px;pointer-events:none;overflow:hidden}
+.glow::before,.glow::after{content:"";position:absolute;border-radius:50%;filter:blur(110px)}
+.glow::before{width:560px;height:560px;left:-120px;top:-200px;background:rgba(139,92,246,.38)}
+.glow::after{width:460px;height:460px;right:-100px;top:-120px;background:rgba(34,211,238,.22)}
+
+/* menü */
+header{position:sticky;top:12px;z-index:10;padding:0 22px}
+.bar{max-width:1080px;margin:12px auto 0;height:62px;padding:0 14px 0 20px;display:flex;align-items:center;justify-content:space-between;
+  background:rgba(20,18,31,.7);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:999px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:19px;text-decoration:none;letter-spacing:-.01em}
+.brand svg{width:28px;height:28px}
+nav{display:flex;align-items:center;gap:6px}
+nav a{text-decoration:none;color:var(--muted);font-weight:500;font-size:15px;padding:8px 14px;border-radius:999px;transition:color .2s,background .2s}
+nav a:hover{color:var(--text);background:rgba(255,255,255,.06)}
+nav a.cta{background:var(--text);color:var(--ink);font-weight:700}
+nav a.cta:hover{background:#fff;color:var(--ink)}
+@media(max-width:700px){nav a:not(.cta){display:none}}
+
+/* hero */
+.hero{position:relative;padding:96px 0 88px;text-align:center}
+.hero .wrap{position:relative}
+.pill{display:inline-flex;align-items:center;gap:10px;padding:8px 16px;border:1px solid var(--line);background:rgba(255,255,255,.04);border-radius:999px;font-size:14px;color:var(--muted);font-weight:500}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--muted)}
+.pill.on .dot{background:var(--green);box-shadow:0 0 0 4px rgba(74,222,128,.18)}
+.pill.off .dot{background:#f87171}
+h1{margin:26px auto 0;font-size:clamp(46px,9vw,92px);font-weight:800;line-height:1.02;letter-spacing:-.04em;max-width:13ch;
+  background:linear-gradient(180deg,#fff 30%,#b9a6f7);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{margin:22px auto 0;max-width:46ch;color:var(--muted);font-size:19px}
+
+.ipcard{margin:40px auto 0;display:flex;align-items:center;gap:8px;max-width:520px;padding:8px;background:var(--panel);border:1px solid var(--line);border-radius:22px;box-shadow:0 20px 60px -20px rgba(139,92,246,.5)}
+.ipcard button{font:inherit;cursor:pointer;border:0}
+.ip{flex:1;min-width:0;text-align:left;background:transparent;color:var(--text);padding:8px 14px;border-radius:14px}
+.ip small{display:block;color:var(--muted);font-size:12.5px;font-weight:500}
+.ip code{font:700 clamp(16px,4.2vw,21px) "Plus Jakarta Sans",sans-serif;overflow-wrap:anywhere}
+.copy{background:linear-gradient(135deg,var(--violet),#6d4be0);color:#fff;font-weight:700;font-size:15px;padding:0 22px;height:52px;border-radius:15px;white-space:nowrap;transition:transform .15s,filter .15s}
+.copy:hover{filter:brightness(1.12)}
+.copy:active{transform:scale(.97)}
+
+/* bölümler */
+section{padding:84px 0}
+.head{margin-bottom:40px}
+h2{font-size:clamp(30px,5vw,46px);font-weight:800;letter-spacing:-.03em;line-height:1.1}
+.sub{margin-top:12px;color:var(--muted);max-width:50ch}
+
+/* modlar: bento */
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:16px}
+.mode{position:relative;overflow:hidden;background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:30px 28px;min-height:230px;display:flex;flex-direction:column;justify-content:flex-end;transition:border-color .2s,transform .2s}
+.mode:hover{border-color:rgba(255,255,255,.2);transform:translateY(-3px)}
+.mode::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;right:-80px;top:-100px;background:var(--c);opacity:.28;filter:blur(60px)}
+.mode h3{position:relative;font-size:26px;font-weight:800;letter-spacing:-.02em}
+.mode p{position:relative;margin-top:8px;color:#c4c1d6;font-size:16px}
+.m1{grid-column:span 4;--c:var(--green);min-height:260px}
+.m2{grid-column:span 2;--c:var(--violet)}
+.soon{position:absolute;top:22px;left:28px;padding:5px 12px;border-radius:999px;background:rgba(251,191,36,.14);border:1px solid rgba(251,191,36,.4);color:var(--amber);font-size:13px;font-weight:700}
+@media(max-width:760px){.m1,.m2{grid-column:span 6}}
+
+/* adımlar */
+.alt{background:linear-gradient(var(--panel),var(--ink))}
+.steps{list-style:none;padding:0;counter-reset:s;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+.steps li{counter-increment:s;background:var(--panel-2);border:1px solid var(--line);border-radius:var(--r);padding:26px}
+.steps li::before{content:counter(s);display:grid;place-items:center;width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,var(--violet),var(--cyan));color:#fff;font-weight:800;margin-bottom:18px}
+.steps strong{display:block;font-size:18px;line-height:1.35;margin-bottom:6px}
+.steps span{color:var(--muted);font-size:15.5px}
+.steps b{color:var(--cyan);font-weight:600;overflow-wrap:anywhere}
+
+/* kurallar */
+.rules{list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px}
+.rules li{display:flex;gap:14px;align-items:flex-start;padding:18px 20px;background:var(--panel);border:1px solid var(--line);border-radius:16px;font-size:16px}
+.rules li::before{content:"";flex:none;width:8px;height:8px;margin-top:11px;border-radius:50%;background:var(--amber)}
+
+/* topluluk */
+.band{position:relative;overflow:hidden;text-align:center;padding:64px 24px;border-radius:28px;border:1px solid var(--line);background:linear-gradient(135deg,#1d1640,#10202b)}
+.band::before{content:"";position:absolute;inset:-40% 20% auto;height:280px;background:rgba(139,92,246,.35);filter:blur(90px)}
+.band>*{position:relative}
+.band .sub{margin:12px auto 0}
+.links{margin-top:32px;display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.btn{display:inline-block;padding:15px 28px;border-radius:999px;font-weight:700;text-decoration:none;transition:transform .15s,filter .15s}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.1)}
+.btn.discord{background:#5865f2;color:#fff}
+.btn.store{background:var(--amber);color:#1a1300}
+.btn.vote{border:1px solid rgba(255,255,255,.25);color:var(--text)}
+
+footer{padding:36px 0 44px;color:var(--muted);font-size:14px}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;border-top:1px solid var(--line);padding-top:28px}
+
+/* tek giriş hareketi */
+.hero .wrap>*{animation:in .7s cubic-bezier(.2,.7,.2,1) both}
+.hero .wrap>*:nth-child(2){animation-delay:.08s}
+.hero .wrap>*:nth-child(3){animation-delay:.16s}
+.hero .wrap>*:nth-child(4){animation-delay:.24s}
+@keyframes in{from{opacity:0;transform:translateY(16px)}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="glow" aria-hidden="true"></div>
+
+<header>
+  <div class="bar">
+    <a class="brand" href="#top" aria-label="Varnix Network ana sayfa">
+      <svg viewBox="0 0 5 5" shape-rendering="crispEdges" aria-hidden="true">
+        <g fill="#8b5cf6"><rect x="0" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="0" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="1" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="1" y="3" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/></g>
+        <g fill="#22d3ee"><rect x="2" y="3" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/></g>
+      </svg>
+      Varnix Network
+    </a>
+    <nav aria-label="Ana menü">
+      <a href="#modlar">Oyun modları</a>
+      <a href="#katil">Nasıl katılırım?</a>
+      <a href="#kurallar">Kurallar</a>
+      <a class="cta" href="#topluluk">Topluluk</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="hero">
+    <div class="wrap">
+      <p class="pill" id="status" role="status"><span class="dot"></span><span id="statusText">Sunucu durumu kontrol ediliyor…</span></p>
+      <h1>Varnix Network</h1>
+      <p class="lead">Türkçe Minecraft sunucusu. Varnix SMP şimdi açık, One Block yakında geliyor.</p>
+      <div class="ipcard">
+        <button class="ip" id="ipBtn" type="button" aria-label="Sunucu adresini kopyala">
+          <small>Sunucu adresi</small>
+          <code id="ipText">jakarta-lanes.tun.ply.gg</code>
+        </button>
+        <button class="copy" id="copyBtn" type="button">Kopyala</button>
+      </div>
+    </div>
+  </div>
+
+  <section id="modlar">
+    <div class="wrap">
+      <div class="head">
+        <h2>Oyun modları</h2>
+        <p class="sub">Şu an Varnix SMP açık. Yeni modlar geldikçe buraya ekleyeceğiz.</p>
+      </div>
+      <div class="bento">
+        <article class="mode m1">
+          <h3>Varnix SMP</h3>
+          <p>Arazini koru, ekonomi kur, oyuncularla ticaret yap ve kendi hikayeni yaz.</p>
+        </article>
+        <article class="mode m2">
+          <span class="soon">Yakında</span>
+          <h3>One Block</h3>
+          <p>Tek bir bloktan başla, adanı büyüt.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="katil" class="alt">
+    <div class="wrap">
+      <div class="head">
+        <h2>Nasıl katılırım?</h2>
+        <p class="sub">Java Edition ile üç adımda sunucudayız.</p>
+      </div>
+      <ol class="steps">
+        <li><strong>Minecraft Java Edition'ı aç</strong><span>Önerilen sürüm: 1.20 ve üzeri.</span></li>
+        <li><strong>Çok oyunculu → Sunucu ekle</strong><span>Sunucu adresi alanına <b>jakarta-lanes.tun.ply.gg</b> yaz.</span></li>
+        <li><strong>Bağlan ve kayıt ol</strong><span>Oyunda <b>/register şifre şifre</b> komutunu kullan.</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="kurallar">
+    <div class="wrap">
+      <div class="head">
+        <h2>Sunucu kuralları</h2>
+        <p class="sub">Herkesin rahat oynaması için kısa ve net tuttuk.</p>
+      </div>
+      <ul class="rules">
+        <li>Hile, hileli istemci ve açık istismarı yasak.</li>
+        <li>Küfür, hakaret ve ayrımcılık yapma.</li>
+        <li>Reklam ve başka sunucu tanıtımı yasak.</li>
+        <li>Başkasının yapısına zarar verme (grief).</li>
+        <li>Yetkililerin kararlarına itiraz için Discord'dan bilet aç.</li>
+        <li>Hesabını ve şifreni kimseyle paylaşma.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="topluluk" style="padding-top:20px">
+    <div class="wrap">
+      <div class="band">
+        <h2>Topluluğa katıl</h2>
+        <p class="sub">Duyurular, destek ve etkinlikler Discord'da.</p>
+        <div class="links">
+          <a class="btn discord" href="https://discord.gg/varnix" target="_blank" rel="noopener">Discord'a katıl</a>
+          <a class="btn store" href="#" target="_blank" rel="noopener">Mağazayı aç</a>
+          <a class="btn vote" href="#" target="_blank" rel="noopener">Oy ver</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Varnix Network</span>
+    <span>Bu site Mojang AB veya Microsoft ile bağlantılı değildir.</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var IP = "jakarta-lanes.tun.ply.gg";           // sunucu adresini buradan değiştir
+  document.getElementById("ipText").textContent = IP;
+  var copyBtn = document.getElementById("copyBtn");
+
+  function copy(){
+    function done(){ copyBtn.textContent = "Kopyalandı!"; setTimeout(function(){ copyBtn.textContent = "Kopyala"; }, 1800); }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(IP).then(done, done);
+    } else {
+      var t = document.createElement("textarea"); t.value = IP; document.body.appendChild(t); t.select();
+      try { document.execCommand("copy"); } catch(e){}
+      document.body.removeChild(t); done();
+    }
+  }
+  copyBtn.addEventListener("click", copy);
+  document.getElementById("ipBtn").addEventListener("click", copy);
+
+  // Canlı oyuncu sayısı (mcsrvstat.us)
+  var box = document.getElementById("status"), txt = document.getElementById("statusText");
+  fetch("https://api.mcsrvstat.us/3/" + IP)
+    .then(function(r){ return r.json(); })
+    .then(function(d){
+      if (d && d.online) {
+        box.className = "pill on";
+        var n = d.players ? d.players.online : 0, m = d.players ? d.players.max : "?";
+        txt.textContent = "Çevrimiçi: " + n + " / " + m + " oyuncu";
+      } else {
+        box.className = "pill off";
+        txt.textContent = "Sunucu şu an kapalı";
+      }
+    })
+    .catch(function(){ txt.textContent = "Sunucu durumu alınamadı"; });
+})();
+</script>
+</body>
+</html>
